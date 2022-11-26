@@ -5,3 +5,8 @@ module.exports.isAccountIdValid = function isAccountIdValied(number) {
 module.exports.maxTwentyTickets = function maxTwentyTickets(number) {
   return number <= 20;
 };
+
+module.exports.minOneAdult = function minOneAdult(data) {
+  const { adultTickets } = data;
+  return adultTickets > 0;
+};

@@ -1,4 +1,8 @@
-const { isAccountIdValid, maxTwentyTickets } = require("../lib/Validation");
+const {
+  isAccountIdValid,
+  maxTwentyTickets,
+  minOneAdult,
+} = require("../lib/Validation");
 
 describe("testing account id", () => {
   it(`id is less than zero`, () => {
@@ -21,5 +25,17 @@ describe("testing 20 tickets max", () => {
   });
   it(`20 tickets`, () => {
     expect(maxTwentyTickets(20)).toEqual(true);
+  });
+});
+
+describe("require at least one adult", () => {
+  it(`1 adult tickets`, () => {
+    expect(minOneAdult({ adultTickets: 1, childTickets: 0 })).toBe(true);
+  });
+  it(`10 adult tickets`, () => {
+    expect(minOneAdult({ adultTickets: 10, childTickets: 7 })).toBe(true);
+  });
+  it(`0 adult tickets`, () => {
+    expect(minOneAdult({ adultTickets: 0, childTickets: 23 })).toBe(false);
   });
 });
