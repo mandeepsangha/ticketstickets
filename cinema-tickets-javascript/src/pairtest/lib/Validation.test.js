@@ -1,4 +1,4 @@
-const { isAccountIdValid } = require("../lib/Validation");
+const { isAccountIdValid, maxTwentyTickets } = require("../lib/Validation");
 
 describe("testing account id", () => {
   it(`id is less than zero`, () => {
@@ -9,5 +9,17 @@ describe("testing account id", () => {
   });
   it(`id is zero`, () => {
     expect(isAccountIdValid(0)).toEqual(false);
+  });
+});
+
+describe("testing 20 tickets max", () => {
+  it(`7 tickets`, () => {
+    expect(maxTwentyTickets(7)).toEqual(true);
+  });
+  it(`777 tickets`, () => {
+    expect(maxTwentyTickets(777)).toEqual(false);
+  });
+  it(`20 tickets`, () => {
+    expect(maxTwentyTickets(20)).toEqual(true);
   });
 });
