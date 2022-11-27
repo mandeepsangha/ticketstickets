@@ -15,14 +15,16 @@ module.exports.orderBreakdown = function orderBreakdown(arr) {
 
 module.exports.orderPrice = function orderPrice(obj) {
   //input is an object with number of each ticket type
-  adultCombinedPrice = obj.ADULT * Prices.adult;
-  childCombinedPrice = obj.CHILD * Prices.child;
-  infantCombinedPrice = obj.INFANT * Prices.infant;
-  return (totalPrice =
-    adultCombinedPrice + childCombinedPrice + infantCombinedPrice);
+  let adultCombinedPrice = obj.ADULT * Prices.adult;
+  let childCombinedPrice = obj.CHILD * Prices.child;
+  let infantCombinedPrice = obj.INFANT * Prices.infant;
+  let totalPrice =
+    adultCombinedPrice + childCombinedPrice + infantCombinedPrice;
+  return totalPrice;
 };
 
 module.exports.orderSeats = function orderSeats(obj) {
   //iput is an object with number of each ticket type
-  return (totalSeats = obj.ADULT + obj.CHILD);
+  let totalSeats = obj.ADULT + obj.CHILD;
+  return totalSeats;
 };

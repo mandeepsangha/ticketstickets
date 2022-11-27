@@ -1,6 +1,6 @@
 module.exports.isAccountIdValid = function isAccountIdValid(obj) {
   const { accountId } = obj;
-  return accountId > 0;
+  return Number.isInteger(accountId) && accountId > 0;
 };
 
 module.exports.maxTwentyTickets = function maxTwentyTickets(obj) {
