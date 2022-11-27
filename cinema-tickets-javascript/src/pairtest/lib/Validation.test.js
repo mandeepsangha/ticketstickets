@@ -28,12 +28,12 @@ describe("testing 20 tickets max", () => {
   });
 });
 
-describe("require at least one adult", () => {
+describe("require at least one adult ticket", () => {
   it(`1 adult tickets`, () => {
     expect(minOneAdult({ adultTickets: 1, childTickets: 0 })).toBe(true);
   });
   it(`10 adult tickets`, () => {
-    expect(minOneAdult({ adultTickets: 10, childTickets: 7 })).toBe(true);
+    expect(minOneAdult({ adultTickets: 10, infantTickets: 7 })).toBe(true);
   });
   it(`0 adult tickets`, () => {
     expect(minOneAdult({ adultTickets: 0, childTickets: 23 })).toBe(false);
