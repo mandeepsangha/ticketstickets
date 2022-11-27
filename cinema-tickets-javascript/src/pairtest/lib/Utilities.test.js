@@ -1,4 +1,4 @@
-//import {orderBreakdown} from './Utilities'
+
 const { orderBreakdown, orderPrice, orderSeats} = require("./Utilities");
 
 describe("breakdown the order into types of tickets", () => {

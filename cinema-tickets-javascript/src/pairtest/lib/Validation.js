@@ -1,12 +1,13 @@
-module.exports.isAccountIdValid = function isAccountIdValied(number) {
-  return number > 0;
+module.exports.isAccountIdValid = function isAccountIdValid(obj) {
+  const { accountId } = obj;
+  return accountId > 0;
 };
 
-module.exports.maxTwentyTickets = function maxTwentyTickets(number) {
-  return number <= 20;
+module.exports.maxTwentyTickets = function maxTwentyTickets(obj) {
+  
+  return obj.ADULT + obj.CHILD + obj.INFANT <= 20;
 };
 
-module.exports.minOneAdult = function minOneAdult(data) {
-  const { adultTickets } = data;
-  return adultTickets > 0;
+module.exports.minOneAdult = function minOneAdult(obj) {
+  return obj.ADULT > 0;
 };
