@@ -1,7 +1,7 @@
 const {
   isAccountIdValid,
   maxTwentyTickets,
-  minOneAdult,
+  minOneAdult,infantAdultRatio,
 } = require("../lib/Validation");
 
 describe("testing account id", () => {
@@ -68,6 +68,37 @@ describe("require at least one adult ticket", () => {
   it(`0 adult tickets`, () => {
     expect(
       minOneAdult({
+        ADULT: 0,
+        CHILD: 1,
+        INFANT: 1,
+      })
+    ).toBe(false);
+  });
+});
+
+
+describe("Infant Adult Ratio", () => {
+  it(`1 adult tickets, 7 infant tickets`, () => {
+    expect(
+      infantAdultRatio({
+        ADULT: 1,
+        CHILD: 0,
+        INFANT: 7,
+      })
+    ).toBe(false);
+  });
+  it(`10 adult tickets, 7 infant tickets`, () => {
+    expect(
+      infantAdultRatio({
+        ADULT: 10,
+        CHILD: 0,
+        INFANT: 7,
+      })
+    ).toBe(true);
+  });
+  it(`0 adult tickets`, () => {
+    expect(
+      infantAdultRatio({
         ADULT: 0,
         CHILD: 1,
         INFANT: 1,
