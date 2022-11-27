@@ -1,5 +1,5 @@
 //import {orderBreakdown} from './Utilities'
-const { orderBreakdown, orderPrice } = require("./Utilities");
+const { orderBreakdown, orderPrice, orderSeats} = require("./Utilities");
 
 describe("breakdown the order into types of tickets", () => {
   it(`3 child, 1 adult`, () => {
@@ -47,6 +47,36 @@ describe("takes breakdown and applies prices correctly and outputs total price f
   it(`0 tickets`, () => {
     expect(
       orderPrice({
+        ADULT: 0,
+        CHILD: 0,
+        INFANT: 0,
+      })
+    ).toEqual(0);
+  });
+});
+
+describe("takes breakdown and calculates number of seats to reserve", () => {
+  it(`3 child, 1 adult`, () => {
+    expect(
+      orderSeats({
+        ADULT: 1,
+        CHILD: 3,
+        INFANT: 0,
+      })
+    ).toEqual(4);
+  });
+  it(`2 of each`, () => {
+    expect(
+      orderSeats({
+        ADULT: 2,
+        CHILD: 2,
+        INFANT: 2,
+      })
+    ).toEqual(4);
+  });
+  it(`0 tickets`, () => {
+    expect(
+      orderSeats({
         ADULT: 0,
         CHILD: 0,
         INFANT: 0,
