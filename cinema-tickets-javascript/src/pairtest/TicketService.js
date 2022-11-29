@@ -1,7 +1,8 @@
-import TicketTypeRequest from "./lib/TicketTypeRequest.js";
+//import TicketTypeRequest from "./lib/TicketTypeRequest.js";
 import InvalidPurchaseException from "./lib/InvalidPurchaseException.js";
 import TicketPaymentService from "../thirdparty/paymentgateway/TicketPaymentService.js";
 import SeatReservationService from "../thirdparty/seatbooking/SeatReservationService.js";
+import InvalidPurchaseException from "./lib/InvalidPurchaseException.js";
 
 const {
   isAccountIdValid,
@@ -44,16 +45,14 @@ export default class TicketService {
   }
 
   purchaseTickets(accountId, ...ticketTypeRequests) {
-    // throws InvalidPurchaseException
-
     const tickets = orderBreakdown(...ticketTypeRequests);
 
-    if ( isRequestValid(accountId, tickets)){
-
-    ticketPaymentService.makePayment(accountId, orderPrice(tickets));
-    seatReservationService.reservation(accountId, orderSeats(tickets));
-    
+    if (isRequestValid(accountId, tickets)) {
+      this.#ticketPaymentService.makePayment(accountId, orderPrice(tickets));
+      this.#seatReservationService.reservation(accountId, orderSeats(tickets));
+    } else {
+      // throws InvalidPurchaseException
+      InvalidPurchaseException();
     }
-
   }
 }

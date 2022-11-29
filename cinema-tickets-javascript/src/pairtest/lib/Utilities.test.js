@@ -1,5 +1,4 @@
-
-const { orderBreakdown, orderPrice, orderSeats} = require("./Utilities");
+const { orderBreakdown, orderPrice, orderSeats } = require("./Utilities");
 
 describe("breakdown the order into types of tickets", () => {
   it(`3 child, 1 adult`, () => {
@@ -25,7 +24,7 @@ describe("breakdown the order into types of tickets", () => {
   });
 });
 
-describe("takes breakdown and applies prices correctly and outputs total price fo the order", () => {
+describe("takes breakdown of tickets object and applies prices correctly and outputs total price fo the order", () => {
   it(`3 child, 1 adult`, () => {
     expect(
       orderPrice({
@@ -55,7 +54,7 @@ describe("takes breakdown and applies prices correctly and outputs total price f
   });
 });
 
-describe("takes breakdown and calculates number of seats to reserve", () => {
+describe("takes breakdown of tickets object and calculates number of seats to reserve", () => {
   it(`3 child, 1 adult`, () => {
     expect(
       orderSeats({
