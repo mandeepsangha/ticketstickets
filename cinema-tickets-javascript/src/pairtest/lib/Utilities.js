@@ -1,8 +1,6 @@
-//import TicketTypeRequest from "./lib/TicketTypeRequest";
+//import TicketTypeRequest from "../src/lib/TicketTypeRequest";
 
 const { Prices } = require("../lib/Prices");
-
-// const {getTicketType} = TicketTypeRequest;
 
 module.exports.orderBreakdown = function orderBreakdown(arr) {
   //input is an array where each element represents one ticket of the type selected

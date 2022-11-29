@@ -1,40 +1,37 @@
-// const {
-//   orderBreakdown,
-//   orderPrice,
-//   orderSeats,
-// } = require("../pairtest/lib/Utilities");
-
-// const {
-//   isAccountIdValid,
-//   maxTwentyTickets,
-//   minOneAdult,
-//   infantAdultRatio,
-// } = require("../pairtest/lib/Validation");
-
-//const {isRequestValid} = require("../pairtest/TicketService");
-//import {isRequestValid} from "../pairtest/TicketService";
 import TicketService from "../pairtest/TicketService";
+import TicketPaymentService from "../thirdparty/paymentgateway/TicketPaymentService";
+import SeatReservationService from "../thirdparty/seatbooking/SeatReservationService";
 
 let testTicketService = new TicketService();
+let testTicketPaymentService = new TicketPaymentService();
+let testSeatReservationService = new SeatReservationService();
 
 describe("is input valid", () => {
-  it(`1 child, 1 adult`, () => {
+  it(`valid 1 child, 1 adult`, () => {
     expect(
       testTicketService.isRequestValid({ accountId: 300 }, ["INFANT", "ADULT"])
     ).toEqual(true);
   });
-  it(`More Infants than adults`, () => {
+  it(`invalid accountId is a string not a number`, () => {
     expect(
-      testTicketService.isRequestValid({ accountId: 300 }, [
+      testTicketService.isRequestValid({ accountId: "300" }, [
+        "INFANT",
+        "ADULT",
+      ])
+    ).toEqual(false);
+  });
+  it(`invalid More Infants than Adults`, () => {
+    expect(
+      testTicketService.isRequestValid({ accountId: 7 }, [
         "INFANT",
         "ADULT",
         "INFANT",
       ])
     ).toEqual(false);
   });
-  it(`more than 20 tickets`, () => {
+  it(`invalid more than 20 tickets`, () => {
     expect(
-      testTicketService.isRequestValid({ accountId: 300 }, [
+      testTicketService.isRequestValid({ accountId: 2 }, [
         "ADULT",
         "ADULT",
         "INFANT",
@@ -61,5 +58,14 @@ describe("is input valid", () => {
         "INFANT",
       ])
     ).toEqual(false);
+  });
+});
+
+
+describe("is input valid", () => {
+  it(`purchaseTickets orderBreakdown`, () => {
+    expect(
+      testTicketService.purchaseTickets(100, ["INFANT", "ADULT"])
+    ).toEqual({INFANT:1, ADULT:1, CHILD:0});
   });
 });
